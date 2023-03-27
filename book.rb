@@ -1,5 +1,4 @@
 class Book
-    def initialize
-        
-    end
+  def initialize
+  end
 end
