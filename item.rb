@@ -3,14 +3,14 @@ require 'date'
 class Item
     attr_reader :id, :genre, :author, :source, :label, :publish_date, :archived
 
-    def initialize (@id, @genre, @author, @source, @label, @publish_date, @archived)
+    def initialize (@id = Random.rand(1..1000))
        @id = id
-       @genre = genre
-       @author = author
-       @source = source
+       @genre = nil
+       @author = nil
+       @source = nil
        @label = label
-       @publish_date = publish_date
-       @archived = archived
+       @publish_date = nil
+       @archived = false
     end
 
     def can_be_archived?
