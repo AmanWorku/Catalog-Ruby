@@ -1,7 +1,7 @@
 require_relative '../label'
 
 RSpec.describe Label do
-  let(:label) { Label.new('Gift', 'Best') }
+  let(:label) { Label.new('Gift', 'Red') }
 
   describe '#new' do
     it 'Should create a new Label object' do
@@ -14,13 +14,13 @@ RSpec.describe Label do
     end
   end
   describe '#title' do
-    it 'Should return the publisher to be Gift' do
+    it 'Should return the title to be Gift' do
       expect(label.title).to eq 'Gift'
     end
   end
-  describe '#cover_state' do
-    it 'Should return the cover state to be best' do
-      expect(book.cover_state).to eq 'Best'
+  describe '#color' do
+    it 'Should return the color to be Red' do
+      expect(label.color).to eq 'Red'
     end
   end
 end
