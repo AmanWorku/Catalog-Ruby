@@ -3,6 +3,7 @@ require_relative 'genre'
 
 class MusicAlbum < Item
   attr_accessor :name, :genre, :publish_date, :on_spotify
+  attr_reader :genres
 
   def initialize(name, publish_date, on_spotify: false)
     super(Date.parse(publish_date))
@@ -14,10 +15,6 @@ class MusicAlbum < Item
 
   def can_be_archived?
     (Date.today.year - @publish_date.year) > 10 && @on_spotify
-  end
-
-  def genres
-    @genres
   end
 
   def add_genre(genre)
