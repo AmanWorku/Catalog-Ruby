@@ -8,7 +8,7 @@ class Item
     @genre = nil
     @author = nil
     @source = nil
-    @label = label
+    @label = nil
     @publish_date = nil
     @archived = false
   end
@@ -20,6 +20,11 @@ class Item
   private
 
   def can_be_archived?
-    (Date.today.year - Date.parse(@publish_date).year) > 10
+    publish_date = Date.parse(@publish_date) rescue nil
+    if publish_date.nil?
+      false
+    else
+      (Date.today.year - publish_date.year) > 10
+    end
   end
 end
