@@ -11,4 +11,3 @@ class Book < Item
     @cover_state = cover_state
   end
 end
-
