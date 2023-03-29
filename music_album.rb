@@ -3,6 +3,7 @@ require_relative 'genre'
 
 class MusicAlbum < Item
   attr_accessor :name, :genres, :publish_date, :on_spotify
+  attr_writer :genre
 
   def initialize(name, publish_date, on_spotify: false, genres: [])
     super(Date.parse(publish_date))
