@@ -15,7 +15,6 @@ def save_labels(labels, filename)
   end
 end
 
-
 books = []
 labels = []
 
@@ -47,12 +46,13 @@ loop do
   case choice
   when '1'
     add_book(books)
-    save_books
+    save_books(books, 'data/books.json')
     puts 'Book Added successfully'
   when '2'
     list_books(books)
   when '3'
     add_label(labels)
+    save_labels(labels, 'data/labels.json')
     puts 'Label Added successfully'
   when '4'
     list_labels(labels)
