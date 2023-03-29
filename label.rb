@@ -16,4 +16,18 @@ class Label < Item
     @items << item
     item.label = self
   end
+
+  def to_h
+    {
+      id: @id,
+      publisher: @publisher,
+      cover_state: @cover_state,
+      genre: @genre,
+      author: @author,
+      source: @source,
+      label: @label&.to_h,
+      publish_date: @publish_date,
+      archived: @archived
+    }
+  end
 end
