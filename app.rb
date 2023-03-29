@@ -1,6 +1,20 @@
 require_relative 'book'
 require_relative 'label'
 require_relative 'book_methods'
+require 'json'
+
+def save_books(books, filename)
+  File.open(filename, 'w') do |file|
+    file.write(JSON.generate(books.map(&:to_h)))
+  end
+end
+
+def save_labels(labels, filename)
+  File.open(filename, 'w') do |file|
+    file.write(JSON.generate(labels.map(&:to_h)))
+  end
+end
+
 
 books = []
 labels = []
@@ -33,6 +47,7 @@ loop do
   case choice
   when '1'
     add_book(books)
+    save_books
     puts 'Book Added successfully'
   when '2'
     list_books(books)
