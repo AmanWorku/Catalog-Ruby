@@ -3,18 +3,6 @@ require_relative 'label'
 require_relative 'book_methods'
 require 'json'
 
-def save_books(books, filename)
-  File.open(filename, 'w') do |file|
-    file.write(JSON.generate(books.map(&:to_h)))
-  end
-end
-
-def save_labels(labels, filename)
-  File.open(filename, 'w') do |file|
-    file.write(JSON.generate(labels.map(&:to_h)))
-  end
-end
-
 books = []
 labels = []
 
@@ -34,6 +22,20 @@ def add_label(labels)
   labels << label
   label
 end
+
+
+def save_books(books, filename)
+  File.open(filename, 'w') do |file|
+    file.write(JSON.generate(books.map(&:to_h)))
+  end
+end
+
+def save_labels(labels, filename)
+  File.open(filename, 'w') do |file|
+    file.write(JSON.generate(labels.map(&:to_h)))
+  end
+end
+
 loop do
   puts 'Enter an option:'
   puts '1. Add a book'
