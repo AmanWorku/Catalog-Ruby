@@ -6,7 +6,7 @@ class MusicAlbumStore
   end
 
   def display_menu
-    puts 'Welcome! 👋😃\nChoose an option: 👉'
+    puts "Welcome! 👋😃\nChoose an option: 👉"
     puts '1. List all albums'
     puts '2. List all genres'
     puts '3. Add an album'
@@ -60,7 +60,8 @@ class MusicAlbumStore
       when 3
         add_album
       when 4
-        print 'Thanks for using 😘\n'
+        print 'Thanks for using 😘'
+        puts "\n"
         break
       else
         puts 'Ooops!!! Invalid option ❌'
