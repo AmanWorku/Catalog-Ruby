@@ -19,4 +19,13 @@ class MusicAlbum < Item
   def add_genre(genre)
     @genres << genre
   end
+
+  def to_h
+    {
+      name: @name,
+      publish_date: @publish_date.iso8601,
+      on_spotify: @on_spotify,
+      genres: @genres
+    }
+  end
 end

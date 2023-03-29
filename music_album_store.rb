@@ -1,8 +1,10 @@
+require 'json'
 require_relative 'music_album'
 
 class MusicAlbumStore
-  def initialize
-    @albums = []
+  def initialize(filename)
+    @filename = filename
+    @albums = load_data || []
   end
 
   def display_menu
@@ -46,6 +48,7 @@ class MusicAlbumStore
     album = MusicAlbum.new(name, publish_date, on_spotify: on_spotify, genres: genres)
     @albums << album
     puts "Added #{album.name}."
+    save_data
   end
 
   def run
@@ -68,7 +71,22 @@ class MusicAlbumStore
       end
     end
   end
+
+  private
+
+  def load_data
+    if File.exist?(@filename)
+      data = JSON.parse(File.read(@filename))
+      data.map { |album_data| MusicAlbum.new(album_data['name'], album_data['publish_date'], on_spotify: album_data['on_spotify'], genres: album_data['genres']) }
+    else
+      []
+    end
+  end
+
+  def save_data
+    File.write(@filename, JSON.generate(@albums.map(&:to_h)))
+  end
 end
 
-store = MusicAlbumStore.new
+store = MusicAlbumStore.new('./data/albums.json')
 store.run
