@@ -2,15 +2,14 @@ require_relative 'item'
 require_relative 'genre'
 
 class MusicAlbum < Item
-  attr_accessor :name, :genre, :publish_date, :on_spotify
-  attr_reader :genres
+  attr_accessor :name, :genres, :publish_date, :on_spotify
 
-  def initialize(name, publish_date, on_spotify: false)
+  def initialize(name, publish_date, on_spotify: false, genres: [])
     super(Date.parse(publish_date))
     @name = name
     @publish_date = Date.parse(publish_date)
     @on_spotify = on_spotify
-    @genres = []
+    @genres = genres
   end
 
   def can_be_archived?
