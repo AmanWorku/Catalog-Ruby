@@ -4,7 +4,11 @@ require_relative 'book_methods'
 books = []
 
 loop do
-  puts "Enter '1' to add a book, '2' to list all books, or 'q' to quit:"
+    puts "Enter an option:"
+    puts "1. Add a book"
+    puts "2. List all books"
+    puts "3. List all labels"
+    puts "4. Exit"
   choice = gets.chomp.downcase
 
   case choice
