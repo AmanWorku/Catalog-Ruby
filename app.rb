@@ -57,6 +57,7 @@ loop do
   when '4'
     list_labels(labels)
   when '5'
+    puts 'Thanks for using.'
     break
   else
     puts 'Invalid choice. Please try again.'
