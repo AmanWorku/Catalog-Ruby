@@ -6,7 +6,7 @@ class Label < Item
 
   def initialize(title, color)
     @id = Random.rand(1..1000)
-    super(title, color)
+    super()
     @title = title
     @color = color
     @items = []
