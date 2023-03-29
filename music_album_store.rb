@@ -78,6 +78,8 @@ class MusicAlbumStore
     if File.exist?(@filename)
       data = JSON.parse(File.read(@filename))
       data.map { |album_data| MusicAlbum.new(album_data['name'], album_data['publish_date'], on_spotify: album_data['on_spotify'], genres: album_data['genres']) }
+    else
+      []
     end
   end
 
