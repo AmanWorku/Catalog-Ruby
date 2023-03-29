@@ -23,17 +23,12 @@ def add_label(labels)
   label
 end
 
-
 def save_books(books, filename)
-  File.open(filename, 'w') do |file|
-    file.write(JSON.generate(books.map(&:to_h)))
-  end
+  File.write(filename, JSON.generate(books.map(&:to_h)))
 end
 
 def save_labels(labels, filename)
-  File.open(filename, 'w') do |file|
-    file.write(JSON.generate(labels.map(&:to_h)))
-  end
+  File.write(filename, JSON.generate(labels.map(&:to_h)))
 end
 
 loop do

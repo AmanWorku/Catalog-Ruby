@@ -25,7 +25,7 @@ class Label < Item
       genre: @genre,
       author: @author,
       source: @source,
-      label: @label ? @label.to_h : nil,
+      label: @label&.to_h,
       publish_date: @publish_date,
       archived: @archived
     }
