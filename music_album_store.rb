@@ -6,7 +6,7 @@ class MusicAlbumStore
   end
 
   def display_menu
-    puts "Choose an option:"
+    puts "Welcome! 👋😃\nChoose an option: 👉"
     puts "1. List all albums"
     puts "2. List all genres"
     puts "3. Add an album"
@@ -15,10 +15,10 @@ class MusicAlbumStore
 
   def list_all_albums
     if @albums.empty?
-      puts "No albums found."
+      puts "No albums found! 🙁"
     else
       @albums.each do |album|
-        puts "#{album.name} (#{album.publish_date.year}) #{album.genres}"
+        puts "\n\n************** Album Information 🎧 *****************\n\n   --> Album title: #{album.name}\n   --> Released year: #{album.publish_date.year}\n   --> Music genre: #{album.genres}\n"
       end
     end
   end
@@ -26,10 +26,10 @@ class MusicAlbumStore
   def list_all_genres
     genres = @albums.map(&:genres).flatten.uniq
     if genres.empty?
-      puts "No genres found."
+      puts "No genres found! 🙁"
     else
       genres.each do |genre|
-        puts genre
+        puts "All genres: " + genre + ", "
       end
     end
   end
@@ -42,7 +42,7 @@ class MusicAlbumStore
     puts 'Is it on spotify? (Y/N):'
     on_spotify = gets.chomp.downcase == 'y'
     puts 'Enter the genre of the music album:'
-    genres = gets.chomp.split(',').map(&:strip)
+    genres = gets.chomp
     album = MusicAlbum.new(name, publish_date, on_spotify: on_spotify, genres: genres)
     @albums << album
     puts "Added #{album.name}."
@@ -60,14 +60,14 @@ class MusicAlbumStore
       when 3
         add_album
       when 4
+        print "Thanks for using 😘\n"
         break
       else
-        puts "Invalid option."
+        puts "Ooops!!! Invalid option ❌"
       end
     end
   end
 end
 
-album = MusicAlbum.new("Some Album", "2022-01-01", genres: ["Rock", "Pop"])
-album.add_genre("Electronic")
-puts album.genres
+store = MusicAlbumStore.new
+store.run
