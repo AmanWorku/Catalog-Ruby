@@ -13,4 +13,9 @@ RSpec.describe Author do
       expect(author).to be_kind_of Item
     end
   end
+  describe '#first_name' do
+    it 'Should return the first name to be Henry' do
+      expect(author.first_name).to eq 'Henry'
+    end
+  end
 end
