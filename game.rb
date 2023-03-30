@@ -15,11 +15,7 @@ class Game < Item
   end
 
   def can_be_archived?
-    @archived = if super || Date.today - Date.parse(@last_played_at) > 365 * 2
-                  true
-                else
-                  false
-                end
+    @archived = super || (Date.today - Date.parse(@last_played_at) > 365 * 2)
   end
 
   private :can_be_archived?
