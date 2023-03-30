@@ -18,4 +18,9 @@ RSpec.describe Author do
       expect(author.first_name).to eq 'Henry'
     end
   end
+  describe '#last_name' do
+    it 'Should return the last name to be Ford' do
+      expect(author.last_name).to eq 'Ford'
+    end
+  end
 end
