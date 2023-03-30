@@ -52,7 +52,13 @@ CREATE TABLE game (
   CONSTRAINT fk_label FOREIGN KEY (label_id) REFERENCES label(label_id)
   CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES authors(author_id)
   PRIMARY KEY(id)
-    
+);
+
+-------------- Create author table -------------------
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    first_name  VARCHAR(100),
+    last_name   VARCHAR(100)
 );
 
 
