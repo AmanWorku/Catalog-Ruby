@@ -8,4 +8,9 @@ RSpec.describe Author do
       expect(author).to be_an_instance_of Author
     end
   end
+  describe '#Item_kind' do
+    it 'Should be a kind of Item' do
+      expect(author).to be_kind_of Item
+    end
+  end
 end
