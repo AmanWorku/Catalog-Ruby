@@ -25,7 +25,7 @@ RSpec.describe Game do
   end
   describe '#publish_date' do
     it 'Should return the publish date to be 2022/09/12' do
-      expect(game.publish_date).to eq '2022/09/12'
+      expect(game.publish_date).to eql '2022/09/12'
     end
   end
   describe '#can_be_archived' do
