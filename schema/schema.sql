@@ -1,4 +1,4 @@
--- Create book table 
+--------- Create book table ----------------
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   publisher VARCHAR,
@@ -10,19 +10,19 @@ CREATE TABLE books (
   archived BOOLEAN NOT NULL
 );
 
--- Create labels table 
+----------- Create labels table ------------------
 CREATE TABLE labels (
   id SERIAL PRIMARY KEY,
   title VARCHAR(50) NOT NULL,
   color VARCHAR(50) NOT NULL
 );
 
--- Create music album table 
+------------ Create music album table ----------------
 CREATE TABLE music_albums (
-  id SERIAL,
-  publish_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  on_spotify boolean,
-  archived boolean,
+  id SERIAL PRIMARY KEY,
+  publish_date DATE NOT NULL DEFAULT DATE,
+  on_spotify BOOLEAN,
+  archived BOOLEAN,
   genre_id INT,
   label_id INT,
   author_id INT,
@@ -32,9 +32,33 @@ CREATE TABLE music_albums (
   PRIMARY KEY(id)
 );
 
--- Create genre table 
+------------ Create genre table -------------------
 CREATE TABLE genres (
-  genre_id SERIAL,
+  genre_id SERIAL PRIMARY KEY,
   name VARCHAR(100),
   PRIMARY KEY(genre_id)
 );
+
+--------------- Create game table ------------------
+CREATE TABLE game (
+  id SERIAL PRIMARY KEY,
+  multiplayer BOOLEAN,
+  last_played_at DATE,
+  genre_id INT,
+  label_id INT,
+  publish_date DATE,
+  author_id INT,
+  CONSTRAINT fk_genre FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
+  CONSTRAINT fk_label FOREIGN KEY (label_id) REFERENCES label(label_id)
+  CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES authors(author_id)
+  PRIMARY KEY(id)
+);
+
+-------------- Create author table -------------------
+CREATE TABLE author (
+    id SERIAL PRIMARY KEY,
+    first_name  VARCHAR(100),
+    last_name   VARCHAR(100)
+);
+
+
