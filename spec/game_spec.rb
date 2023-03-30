@@ -1,7 +1,7 @@
 require_relative '../game'
 
-RSpec.describe Game do 
-    let(:game) {Game.new('N', '2017-01-01', '2022/09/12')}
+RSpec.describe Game do
+  let(:game) { Game.new('N', '2017-01-01', '2022/09/12') }
 
   describe '#new' do
     it 'Should create a new Game object' do
@@ -30,10 +30,9 @@ RSpec.describe Game do
   end
   describe '#can_be_archived' do
     it 'Should return the publish date to be 2022/09/12' do
-        game = Game.new('N', '2017-01-01', '2022/09/12')
-can_be_archived = game.instance_eval { can_be_archived? }
+      game = Game.new('N', '2017-01-01', '2022/09/12')
+      can_be_archived = game.instance_eval { can_be_archived? }
       expect(can_be_archived).to be true
     end
   end
-  
 end

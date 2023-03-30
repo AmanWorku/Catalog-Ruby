@@ -1,7 +1,7 @@
 require_relative '../author'
 
-RSpec.describe Author do 
-    let(:author) {Author.new('Henry', 'Ford')}
+RSpec.describe Author do
+  let(:author) { Author.new('Henry', 'Ford') }
 
   describe '#new' do
     it 'Should create a new Author object' do
