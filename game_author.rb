@@ -32,4 +32,12 @@ class GameStore
       puts "#{author.full_name} (ID: #{author.id})"
     end
   end
+
+  def display_menu
+    puts "Welcome! 👋😃\nChoose an option: 👉"
+    puts '1. List all games'
+    puts '2. List all authors'
+    puts '3. Add game'
+    puts '4. Quit'
+  end
 end
