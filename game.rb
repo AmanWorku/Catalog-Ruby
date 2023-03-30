@@ -10,12 +10,8 @@ class Game < Item
     super()
     @multiplayer = multiplayer
     @last_played_at = last_played_at
-    @publish_date = Date.parse(publish_date)
+    @publish_date = Date.parse(publish_date).strftime('%Y/%m/%d')
     @archived = can_be_archived?
-  end
-
-  def publish_date
-    @publish_date.strftime('%Y/%m/%d')
   end
 
   def can_be_archived?
