@@ -29,7 +29,8 @@ RSpec.describe Game do
     end
   end
   describe '#can_be_archived' do
-    it 'Should return the publish date to be 2022/09/12' do
+    it 'Should return true for the method can_be_archived?
+    ' do
       game = Game.new('N', '2017-01-01', '2022/09/12')
       can_be_archived = game.instance_eval { can_be_archived? }
       expect(can_be_archived).to be true
