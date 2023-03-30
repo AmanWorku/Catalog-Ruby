@@ -19,4 +19,7 @@ class Game < Item
         else
             false
         end
+    end
+
+    private :can_be_archived?
 end
