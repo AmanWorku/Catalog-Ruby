@@ -56,11 +56,11 @@ RSpec.describe Author do
 
     it 'returns a hash representation of the author' do
       expect(author.to_hash).to eq({
-        id: author.id,
-        first_name: 'John',
-        last_name: 'Doe',
-        items: [{ title: 'The Catcher in the Rye' }]
-      })
+                                     id: author.id,
+                                     first_name: 'John',
+                                     last_name: 'Doe',
+                                     items: [{ title: 'The Catcher in the Rye' }]
+                                   })
     end
   end
 end
