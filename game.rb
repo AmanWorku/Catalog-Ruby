@@ -1,4 +1,3 @@
-
 require_relative 'item'
 require 'date'
 
@@ -6,7 +5,7 @@ class Game < Item
   attr_accessor :multiplayer, :last_played_at, :publish_date, :authors
   attr_reader :id, :title
 
-  def initialize(title, multiplayer, last_played_at, publish_date, authors=[])
+  def initialize(title, multiplayer, last_played_at, publish_date, authors = [])
     @id = Random.rand(1..1000)
     super()
     @title = title
@@ -24,7 +23,7 @@ class Game < Item
   def add_authors(authors)
     @authors ||= []
     authors.each { |author| add_author(author) }
-  end  
+  end
 
   def add_author(author)
     if !authors.include?(author)
@@ -35,7 +34,7 @@ class Game < Item
 
   def can_be_archived?
     @archived ||= super || (Date.today - Date.parse(@last_played_at) > 365 * 2)
-  end  
+  end
 
   private :can_be_archived?
 
@@ -50,4 +49,3 @@ class Game < Item
     }
   end
 end
-

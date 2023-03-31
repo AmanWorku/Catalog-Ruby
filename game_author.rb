@@ -26,30 +26,30 @@ class GameStore
 
   def list_games
     if games.empty?
-      puts "There are no games in the catalog."
+      puts 'There are no games in the catalog.'
     else
       games.each do |game|
         puts "Game ID: #{game.id}"
         puts "Title: #{game.title}"
-        puts "Multiplayer: #{game.multiplayer ? "Yes" : "No"}"
+        puts "Multiplayer: #{game.multiplayer ? 'Yes' : 'No'}"
         puts "Last Played At: #{game.last_played_at}"
         puts "Publish Date: #{game.publish_date}"
-        puts "Authors: #{game.authors.map(&:full_name).join(", ")}"
-        puts "-" * 50
+        puts "Authors: #{game.authors.map(&:full_name).join(', ')}"
+        puts '-' * 50
       end
     end
   end
 
   def list_authors
     if authors.empty?
-      puts "There are no authors in the catalog."
+      puts 'There are no authors in the catalog.'
     else
-      puts "List of authors:"
+      puts 'List of authors:'
       authors.each do |author|
         puts "Author ID: #{author.id}"
         puts "Name: #{author.full_name}"
-        puts "Items: #{author.items.map(&:title).join(", ")}"
-        puts "-" * 50
+        puts "Items: #{author.items.map(&:title).join(', ')}"
+        puts '-' * 50
       end
     end
   end
@@ -70,14 +70,14 @@ class GameStore
 
   def display_menu
     puts "Welcome! 👋😃\nChoose an option: 👉"
-    puts "1. List all games"
-    puts "2. List all authors"
-    puts "3. Add game"
-    puts "4. Quit"
+    puts '1. List all games'
+    puts '2. List all authors'
+    puts '3. Add game'
+    puts '4. Quit'
   end
 end
 
-store = GameStore.new 
+store = GameStore.new
 
 loop do
   store.display_menu
@@ -90,29 +90,29 @@ loop do
   when 2
     store.list_authors
   when 3
-    puts "Enter game title:"
+    puts 'Enter game title:'
     title = gets.chomp
-    puts "Is the game multiplayer? (Y/N)"
-    multiplayer = gets.chomp.downcase == "y"
-    puts "Enter the date of the last time the
- game was played (YYYY/MM/DD):"
+    puts 'Is the game multiplayer? (Y/N)'
+    multiplayer = gets.chomp.downcase == 'y'
+    puts 'Enter the date of the last time the
+ game was played (YYYY/MM/DD):'
     last_played_at = gets.chomp
-    puts "Enter the game's publish date (YYYY/MM/DD):"
+    puts 'Enter the game\'s publish date (YYYY/MM/DD):'
     publish_date = gets.chomp
     game = Game.new(title, multiplayer, last_played_at, publish_date, [])
-    puts "Enter author first name:"
+    puts 'Enter author first name:'
     first_name = gets.chomp
-    puts "Enter author last name:"
+    puts 'Enter author last name:'
     last_name = gets.chomp
     author = Author.new(first_name, last_name)
     game.add_author(author)
     store.add_game(game)
-  
+
   when 4
-    puts "Goodbye! 👋"
+    puts 'Goodbye! 👋'
     break
   else
-    puts "Invalid choice. Please choose again."
+    puts 'Invalid choice. Please choose again.'
   end
 end
 

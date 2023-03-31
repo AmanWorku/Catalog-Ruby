@@ -1,10 +1,10 @@
-
 class Author < Item
   attr_reader :id, :first_name, :last_name, :items
 
   @@id_counter = 0
 
   def initialize(first_name, last_name, items = [])
+    super ()
     @@id_counter += 1
     @id = @@id_counter
     @first_name = first_name
