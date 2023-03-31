@@ -1,14 +1,19 @@
+
 class Author < Item
   attr_reader :id, :first_name, :last_name, :items
 
   @@id_counter = 0
 
-  def initialize(first_name, last_name)
+  def initialize(first_name, last_name, items = [])
     @@id_counter += 1
     @id = @@id_counter
     @first_name = first_name
     @last_name = last_name
     @items = []
+  end
+
+  def self.json_create(object)
+    new(object['first_name'], object['last_name'], object['items'])
   end
 
   def add_item(item)
@@ -22,10 +27,10 @@ class Author < Item
 
   def to_hash
     {
-      id: id,
-      first_name: first_name,
-      last_name: last_name,
-      items: items.map(&:to_hash)
+      id: @id,
+      first_name: @first_name,
+      last_name: @last_name,
+      items: @items.map(&:to_hash)
     }
   end
 end

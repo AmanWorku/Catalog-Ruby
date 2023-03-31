@@ -55,14 +55,16 @@ class GameStore
   end
 
   def save_data
-    File.write('games.json', JSON.generate(games.map(&:to_hash)))
-    File.write('authors.json', JSON.generate(authors.map(&:to_hash)))
+    File.write('./data/games.json', JSON.generate(games.map(&:to_hash)))
+    File.write('./data/authors.json', JSON.generate(authors.map(&:to_hash)))
   end
 
   def load_data
-    if File.exist?('games.json') && File.exist?('authors.json')
-      @games = JSON.parse(File.read('games.json'), object_class: Game)
-      @authors = JSON.parse(File.read('authors.json'), object_class: Author)
+    if File.exist?('./data/games.json') && File.exist?('./data/authors.json')
+      games_data = JSON.parse(File.read('./data/games.json'), object_class: Game)
+      authors_data = JSON.parse(File.read('./data/authors.json'), object_class: Author)
+      @games = games_data.map { |game_data| Game.new(game_data['title'], game_data['multiplayer'], game_data['last_played_at'], game_data['publish_date'], game_data['authors']) }
+      @authors = authors_data
     end
   end
 
@@ -74,7 +76,6 @@ class GameStore
     puts "4. Quit"
   end
 end
-
 
 store = GameStore.new
 store.load_data
@@ -94,7 +95,8 @@ loop do
     title = gets.chomp
     puts "Is the game multiplayer? (Y/N)"
     multiplayer = gets.chomp.downcase == "y"
-    puts "Enter the date of the last time the game was played (YYYY/MM/DD):"
+    puts "Enter the date of the last time the
+ game was played (YYYY/MM/DD):"
     last_played_at = gets.chomp
     puts "Enter the game's publish date (YYYY/MM/DD):"
     publish_date = gets.chomp
@@ -114,3 +116,4 @@ loop do
     puts "Invalid choice. Please choose again."
   end
 end
+

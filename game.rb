@@ -1,3 +1,4 @@
+
 require_relative 'item'
 require 'date'
 
@@ -13,8 +14,11 @@ class Game < Item
     @last_played_at = last_played_at
     @publish_date = Date.parse(publish_date).strftime('%Y/%m/%d')
     @archived = can_be_archived?
-    @authors = []
     add_authors(authors)
+  end
+
+  def self.json_create(object)
+    new(object['title'], object['multiplayer'], object['last_played_at'], object['publish_date'], object['authors'])
   end
 
   def add_authors(authors)
@@ -30,8 +34,8 @@ class Game < Item
   end
 
   def can_be_archived?
-    @archived = super || (Date.today - Date.parse(@last_played_at) > 365 * 2)
-  end
+    @archived ||= super || (Date.today - Date.parse(@last_played_at) > 365 * 2)
+  end  
 
   private :can_be_archived?
 
@@ -45,6 +49,5 @@ class Game < Item
       author_ids: @authors.map(&:id)
     }
   end
-  
-  
 end
+
