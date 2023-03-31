@@ -33,7 +33,7 @@ class GameStore
         puts "Last Played At: #{game.last_played_at}"
         puts "Publish Date: #{game.publish_date}"
         puts "Authors: #{game.authors.map(&:full_name).join(", ")}"
-        puts "-" * 30
+        puts "-" * 50
       end
     end
   end
