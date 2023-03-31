@@ -35,7 +35,16 @@ class Game < Item
 
   private :can_be_archived?
 
-
+  def to_hash
+    {
+      id: @id,
+      title: @title,
+      multiplayer: @multiplayer,
+      last_played_at: @last_played_at,
+      publish_date: @publish_date,
+      author_ids: @authors.map(&:id)
+    }
+  end
   
   
 end
