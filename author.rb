@@ -1,3 +1,6 @@
+require 'date'
+require_relative 'item'
+
 class Author < Item
   attr_reader :id, :first_name, :last_name, :items
 
