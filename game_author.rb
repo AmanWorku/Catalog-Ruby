@@ -77,8 +77,7 @@ class GameStore
   end
 end
 
-store = GameStore.new
-store.load_data
+store = GameStore.new 
 
 loop do
   store.display_menu
@@ -117,3 +116,4 @@ loop do
   end
 end
 
+store.run
