@@ -18,10 +18,10 @@ class GameStore
   end
 
   def add_author(author)
-    if !authors.include?(author)
-      authors << author
-      author.items.each { |item| add_game(item) if item.is_a?(Game) }
-    end
+    return if authors.include?(author)
+
+    authors << author
+    author.items.each { |item| add_game(item) if item.is_a?(Game) }
   end
 
   def list_games
@@ -55,17 +55,19 @@ class GameStore
   end
 
   def save_data
+    return unless File.exist?('./data/games.json') && File.exist?('./data/authors.json')
+
     File.write('./data/games.json', JSON.generate(games.map(&:to_hash)))
     File.write('./data/authors.json', JSON.generate(authors.map(&:to_hash)))
   end
 
   def load_data
-    if File.exist?('./data/games.json') && File.exist?('./data/authors.json')
-      games_data = JSON.parse(File.read('./data/games.json'), object_class: Game)
-      authors_data = JSON.parse(File.read('./data/authors.json'), object_class: Author)
-      @games = games_data.map { |game_data| Game.new(game_data['title'], game_data['multiplayer'], game_data['last_played_at'], game_data['publish_date'], game_data['authors']) }
-      @authors = authors_data
-    end
+    return unless File.exist?('./data/games.json') && File.exist?('./data/authors.json')
+
+    games_data = JSON.parse(File.read('./data/games.json'), object_class: Game)
+    authors_data = JSON.parse(File.read('./data/authors.json'), object_class: Author)
+    @games = games_data.map { |game_data| Game.new(game_data['title'], game_data['multiplayer'], game_data['last_played_at'], game_data['publish_date'], game_data['authors']) }
+    @authors = authors_data
   end
 
   def display_menu
