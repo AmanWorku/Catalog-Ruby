@@ -1,13 +1,11 @@
-require 'date'
-require_relative 'item'
-
 class Author < Item
-  attr_accessor :first_name, :last_name
-  attr_reader :id, :items
+  attr_reader :id, :first_name, :last_name, :items
+
+  @@id_counter = 0
 
   def initialize(first_name, last_name)
-    @id = Random.rand(1..1000)
-    super()
+    @@id_counter += 1
+    @id = @@id_counter
     @first_name = first_name
     @last_name = last_name
     @items = []
@@ -16,5 +14,9 @@ class Author < Item
   def add_item(item)
     (item.is_a?(Item) && @items.include?(item)) || (@items << item)
     item.add_author(self)
+  end
+
+  def full_name
+    "#{@first_name} #{@last_name}"
   end
 end
