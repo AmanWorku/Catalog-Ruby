@@ -1,4 +1,3 @@
-require 'date'
 require_relative 'item'
 
 class Author < Item
@@ -6,7 +5,7 @@ class Author < Item
 
   @id_counter = 0
 
-  def initialize(first_name = '', last_name = '', items = [])
+  def initialize(first_name = '', last_name = '', _items = [])
     super()
     @id_counter ||= 0
     @id_counter += 1
@@ -38,15 +37,10 @@ class Author < Item
     }
   end
 
-  def self.id_counter
-    @id_counter
+  class << self
+    attr_accessor :id_counter
   end
-
-  def self.id_counter=(value)
-    @id_counter = value
-  end
-
-  private_class_method :id_counter=
+  @id_counter = 0
 end
 
 class Foo
