@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'game'
 require_relative 'author'
 
@@ -12,21 +13,22 @@ class GameStore
   def add_game(game)
     @games << game
     game.authors.each { |author| add_author(author) }
+    save_data
     puts "Game '#{game.title}' has been added."
   end
 
   def add_author(author)
-    if !@authors.include?(author)
-      @authors << author
+    if !authors.include?(author)
+      authors << author
       author.items.each { |item| add_game(item) if item.is_a?(Game) }
     end
   end
 
   def list_games
-    if @games.empty?
+    if games.empty?
       puts "There are no games in the catalog."
     else
-      @games.each do |game|
+      games.each do |game|
         puts "Game ID: #{game.id}"
         puts "Title: #{game.title}"
         puts "Multiplayer: #{game.multiplayer ? "Yes" : "No"}"
@@ -39,16 +41,28 @@ class GameStore
   end
 
   def list_authors
-    if @authors.empty?
+    if authors.empty?
       puts "There are no authors in the catalog."
     else
       puts "List of authors:"
-      @authors.each do |author|
+      authors.each do |author|
         puts "Author ID: #{author.id}"
         puts "Name: #{author.full_name}"
         puts "Items: #{author.items.map(&:title).join(", ")}"
         puts "-" * 50
       end
+    end
+  end
+
+  def save_data
+    File.write('games.json', JSON.generate(games.map(&:to_hash)))
+    File.write('authors.json', JSON.generate(authors.map(&:to_hash)))
+  end
+
+  def load_data
+    if File.exist?('games.json') && File.exist?('authors.json')
+      @games = JSON.parse(File.read('games.json'), object_class: Game)
+      @authors = JSON.parse(File.read('authors.json'), object_class: Author)
     end
   end
 
@@ -63,6 +77,7 @@ end
 
 
 store = GameStore.new
+store.load_data
 
 loop do
   store.display_menu

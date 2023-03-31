@@ -18,8 +18,9 @@ class Game < Item
   end
 
   def add_authors(authors)
+    @authors ||= []
     authors.each { |author| add_author(author) }
-  end
+  end  
 
   def add_author(author)
     if !authors.include?(author)
@@ -33,4 +34,8 @@ class Game < Item
   end
 
   private :can_be_archived?
+
+
+  
+  
 end
