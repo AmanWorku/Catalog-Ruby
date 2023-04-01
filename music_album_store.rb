@@ -89,4 +89,3 @@ class MusicAlbumStore
 end
 
 store = MusicAlbumStore.new('./data/albums.json')
-store.run

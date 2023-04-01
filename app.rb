@@ -60,7 +60,8 @@ def add_book(books)
   book
 end
 
-def book_options
+def book_options(books)
+
   loop do
     puts 'Enter an option:'
     puts '1. Add a book'
@@ -92,33 +93,34 @@ def book_options
   end
 end
 
-puts "Welcome to our catalog 👋\nSelect an option:"
 
 def main_menu
+  puts "Welcome to our catalog 👋\nSelect an option:"
+  options = [
+    '1 - List books options',
+    '====================================',
+    '2 - List music options',
+    '====================================',
+    '3 - List game options',
+    '====================================',
+    '4 - Quit'
+  ]
+  puts options
+  option = gets.chomp.downcase
+  case option
+  when '1'
+    book_options(books)
+  when '2'
+    store = MusicAlbumStore.new('./data/albums.json')
+    store.run
+  when '3'
+    game = GameStore.new
+    game.display_menu
+  when '4'
+    puts 'Thanks for using.'
+  else
+    puts 'Invalid choice. Please try again.'
+  end
+end
 
-options = [
-  '1 - List books options',
-  '====================================',
-  '2 - List music options',
-  '====================================',
-  '3 - List game options',
-  '====================================',
-  '4 - Quit'
-]
-puts options
-option = gets.chomp.downcase
-case option
-when '1'
-  book_options
-when '2'
-  store = MusicAlbumStore.new
-  store.display_menu
-when '3'
-  game = GameStore.new
-  game.display_menu
-when '4'
-  puts 'Thanks for using.'
-else
-  puts 'Invalid choice. Please try again.'
-end
-end
+main_menu

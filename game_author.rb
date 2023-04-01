@@ -71,47 +71,44 @@ class GameStore
   end
 
   def display_menu
+  loop do
     puts "Welcome! 👋😃\nChoose an option: 👉"
     puts '1. List all games'
     puts '2. List all authors'
     puts '3. Add game'
     puts '4. Quit'
+    choice = gets.chomp.to_i
+    case choice
+    when 1
+      list_games
+    when 2
+      list_authors
+    when 3
+      puts 'Enter game title:'
+      title = gets.chomp
+      puts 'Is the game multiplayer? (Y/N)'
+      multiplayer = gets.chomp.downcase == 'y'
+      puts 'Enter the date of the last time the
+   game was played (YYYY/MM/DD):'
+      last_played_at = gets.chomp
+      puts 'Enter the game\'s publish date (YYYY/MM/DD):'
+      publish_date = gets.chomp
+      game = Game.new(title, multiplayer, last_played_at, publish_date, [])
+      puts 'Enter author first name:'
+      first_name = gets.chomp
+      puts 'Enter author last name:'
+      last_name = gets.chomp
+      author = Author.new(first_name, last_name)
+      game.add_author(author)
+      add_game(game)
+    when 4
+      puts 'Goodbye! 👋'
+      break
+    else
+      puts 'Invalid choice. Please choose again.'
+    end
   end
+  end
+  
 end
 
-store = GameStore.new
-
-loop do
-  store.display_menu
-  choice = gets.chomp.to_i
-  case choice
-  when 1
-    store.list_games
-  when 2
-    store.list_authors
-  when 3
-    puts 'Enter game title:'
-    title = gets.chomp
-    puts 'Is the game multiplayer? (Y/N)'
-    multiplayer = gets.chomp.downcase == 'y'
-    puts 'Enter the date of the last time the
- game was played (YYYY/MM/DD):'
-    last_played_at = gets.chomp
-    puts 'Enter the game\'s publish date (YYYY/MM/DD):'
-    publish_date = gets.chomp
-    game = Game.new(title, multiplayer, last_played_at, publish_date, [])
-    puts 'Enter author first name:'
-    first_name = gets.chomp
-    puts 'Enter author last name:'
-    last_name = gets.chomp
-    author = Author.new(first_name, last_name)
-    game.add_author(author)
-    store.add_game(game)
-  when 4
-    puts 'Goodbye! 👋'
-    break
-  else
-    puts 'Invalid choice. Please choose again.'
-  end
-end
-store.run
