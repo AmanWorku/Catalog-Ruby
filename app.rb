@@ -7,94 +7,80 @@ require_relative 'game_author'
 require_relative 'game'
 require 'json'
 
-books = []
-labels = []
+class App
+  attr_reader :books, :labels
 
-def get_input(prompt, type = :to_s)
-  print prompt
-  input = gets.chomp
-  type == :to_i ? input.to_i : input
-end
-
-def list_labels(labels)
-  puts 'Listing all labels:'
-  labels.each do |label|
-    puts "Label #{label.id}: #{label.title} (#{label.color})"
+  def initialize
+    @books = []
+    @labels = []
   end
-end
 
-def add_label(labels)
-  puts 'Enter label title:'
-  title = gets.chomp
-  puts 'Enter label color:'
-  color = gets.chomp
-  label = Label.new(title, color)
-  labels << label
-  label
-end
-
-def save_books(books, filename)
-  File.write(filename, JSON.generate(books.map(&:to_h)))
-end
-
-def save_labels(labels, filename)
-  File.write(filename, JSON.generate(labels.map(&:to_h)))
-end
-
-def list_books(books)
-  puts 'Listing all books:'
-  books.each do |book|
-    puts "Book #{book.id}: #{book.title} by #{book.author} (#{book.pages} pages)"
+  def get_input(prompt, type = :to_s)
+    print prompt
+    input = gets.chomp
+    type == :to_i ? input.to_i : input
   end
-end
 
-def add_book(books)
-  puts 'Enter book title:'
-  title = gets.chomp
-  puts 'Enter book author:'
-  author = gets.chomp
-  puts 'Enter book pages:'
-  pages = gets.chomp.to_i
-  book = Book.new(title, author, pages)
-  books << book
-  book
-end
+  def list_labels
+    puts 'Listing all labels:'
+    labels.each do |label|
+      puts "Label #{label.id}: #{label.title} (#{label.color})"
+    end
+  end
 
-def book_options(books)
+  def add_label
+    puts 'Enter label title:'
+    title = gets.chomp
+    puts 'Enter label color:'
+    color = gets.chomp
+    label = Label.new(title, color)
+    labels << label
+    label
+  end
 
-  loop do
-    puts 'Enter an option:'
-    puts '1. Add a book'
-    puts '2. List all books'
-    puts '3. Add a label'
-    puts '4. List all labels'
-    puts '5. Exit'
-    choice = gets.chomp.downcase
+  def save_books(filename)
+    File.write(filename, JSON.generate(books.map(&:to_h)))
+  end
 
-    case choice
-    when '1'
-      add_book(books)
-      save_books(books, 'data/books.json')
-      puts 'Book Added successfully'
-    when '2'
-      list_books(books)
-    when '3'
-      add_label(labels)
-      save_labels(labels, 'data/labels.json')
-      puts 'Label Added successfully'
-    when '4'
-      list_labels(labels)
-    when '5'
-      puts 'Thanks for using.'
-      break
-    else
-      puts 'Invalid choice. Please try again.'
+  def save_labels(filename)
+    File.write(filename, JSON.generate(labels.map(&:to_h)))
+  end
+
+  def book_options
+    loop do
+      puts 'Enter an option:'
+      puts '1. Add a book'
+      puts '2. List all books'
+      puts '3. Add a label'
+      puts '4. List all labels'
+      puts '5. Exit'
+      choice = gets.chomp.downcase
+
+      case choice
+      when '1'
+        add_book(books)
+        save_books('data/books.json')
+        puts 'Book added successfully'
+      when '2'
+        list_books(books)
+      when '3'
+        add_label
+        save_labels('data/labels.json')
+        puts 'Label added successfully'
+      when '4'
+        list_labels
+      when '5'
+        puts 'Thanks for using.'
+        return
+      else
+        puts 'Invalid choice. Please try again.'
+      end
     end
   end
 end
 
-
 def main_menu
+  app = App.new
   puts "Welcome to our catalog 👋\nSelect an option:"
   options = [
     '1 - List books options',
@@ -109,7 +95,7 @@ def main_menu
   option = gets.chomp.downcase
   case option
   when '1'
-    book_options(books)
+    app.book_options
   when '2'
     store = MusicAlbumStore.new('./data/albums.json')
     store.run
@@ -118,6 +104,7 @@ def main_menu
     game.display_menu
   when '4'
     puts 'Thanks for using.'
+    break
   else
     puts 'Invalid choice. Please try again.'
   end

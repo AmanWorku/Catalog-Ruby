@@ -87,5 +87,3 @@ class MusicAlbumStore
     File.write(@filename, JSON.generate(@albums.map(&:to_h)))
   end
 end
-
-store = MusicAlbumStore.new('./data/albums.json')
