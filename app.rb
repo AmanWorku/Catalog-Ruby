@@ -71,6 +71,7 @@ class App
         list_labels
       when '5'
         puts 'Thanks for using.'
+        main_menu
         return
       else
         puts 'Invalid choice. Please try again.'
@@ -104,7 +105,7 @@ def main_menu
     game.display_menu
   when '4'
     puts 'Thanks for using.'
-    break
+    return
   else
     puts 'Invalid choice. Please try again.'
   end

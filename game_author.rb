@@ -102,7 +102,8 @@ class GameStore
         game.add_author(author)
         add_game(game)
       when 4
-        app.main_menu
+        main_menu
+        return
       else
         puts 'Invalid choice. Please choose again.'
       end

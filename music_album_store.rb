@@ -1,5 +1,6 @@
 require 'json'
 require_relative 'music_album'
+require_relative 'app'
 
 class MusicAlbumStore
   def initialize(filename)
@@ -65,7 +66,8 @@ class MusicAlbumStore
       when 4
         print 'Thanks for using 😘'
         puts "\n"
-        break
+        main_menu
+        return
       else
         puts 'Ooops!!! Invalid option ❌'
       end
