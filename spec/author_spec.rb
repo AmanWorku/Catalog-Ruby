@@ -1,26 +1,31 @@
+require 'date'
 require_relative '../author'
 
-RSpec.describe Author do
-  let(:author) { Author.new('Henry', 'Ford') }
+describe Author do
+  let(:author) { Author.new('Salwa', 'Ballouti') }
+  let(:game) { double('game') }
 
-  describe '#new' do
-    it 'Should create a new Author object' do
-      expect(author).to be_an_instance_of Author
+  describe '#initialize' do
+    it 'should set an id' do
+      expect(author.id).to_not be_nil
+    end
+
+    it 'should set the first name' do
+      expect(author.first_name).to eq('Salwa')
+    end
+
+    it 'should set the last name' do
+      expect(author.last_name).to eq('Ballouti')
+    end
+
+    it 'should set an empty array for items' do
+      expect(author.items).to be_empty
     end
   end
-  describe '#Item_kind' do
-    it 'Should be a kind of Item' do
-      expect(author).to be_kind_of Item
-    end
-  end
-  describe '#first_name' do
-    it 'Should return the first name to be Henry' do
-      expect(author.first_name).to eql 'Henry'
-    end
-  end
-  describe '#last_name' do
-    it 'Should return the last name to be Ford' do
-      expect(author.last_name).to eql 'Ford'
+
+  describe '#full_name' do
+    it 'should return the full name' do
+      expect(author.full_name).to eq('Salwa Ballouti')
     end
   end
 end
