@@ -105,7 +105,7 @@ def main_menu
     game.display_menu
   when '4'
     puts 'Thanks for using.'
-    return
+    nil
   else
     puts 'Invalid choice. Please try again.'
   end
